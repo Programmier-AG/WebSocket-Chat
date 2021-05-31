@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#showcase {
+    background-color: black;
+    width: 100%;
+    height: auto;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+}
+
+#messages {
+    background-color: #dcdcdc;
+    height: 50vh;
+    padding: 20px;
+    overflow-y: scroll;
+}
+
+.message {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    margin: 10px 0px 10px 0px;
+}
+
+.form {
+    width: 100%;
+    text-align: center;
+}
+
+.form input[type="text"], .form textarea {
+    width: 400px;
+    height: 45px;
+    font-size: 20px;
+    padding-left: 20px;
+    border: 1px solid black;
+    outline: none;
+    margin: 20px;
+}
+
+button {
+    width: 200px;
+    height: 40px;
+    font-size: 15px;
+    background-color: dodgerblue;
+    box-shadow: none;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    cursor: pointer;
+}

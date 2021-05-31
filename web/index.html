@@ -5,67 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket-Chat</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        #showcase {
-            background-color: black;
-            width: 100%;
-            height: auto;
-            color: #fff;
-            text-align: center;
-            padding: 30px 0px 30px 0px;
-        }
-
-        #messages {
-            background-color: #dcdcdc;
-            height: 50vh;
-            padding: 20px;
-            overflow-y: scroll;
-        }
-
-        .message {
-            border-radius: 10px;
-            padding: 20px;
-            background-color: #fff;
-            margin: 10px 0px 10px 0px;
-        }
-
-        .form {
-            width: 100%;
-            text-align: center;
-        }
-
-        .form input[type="text"], .form textarea {
-            width: 400px;
-            height: 45px;
-            font-size: 20px;
-            padding-left: 20px;
-            border: 1px solid black;
-            outline: none;
-            margin: 20px;
-        }
-
-        button {
-            width: 200px;
-            height: 40px;
-            font-size: 15px;
-            background-color: dodgerblue;
-            box-shadow: none;
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        button:hover {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="showcase">
@@ -100,73 +40,6 @@
         <button style="margin-bottom: 30px;" onclick="sendmessage()">Abschicken</button>
     </div>
 
-    <script>
-        var ws = new WebSocket("ws://0.0.0.0:2222")
-        var username = ""
-
-        ws.onerror = () => {
-            alert("Ein Fehler bei der Verbindung mit dem Server ist aufgetreten!")
-        }
-
-        ws.onopen = () => {
-            document.querySelector("#status").innerText = "Verbunden!"
-            document.querySelector("#status").style.color = 'green'
-        }
-
-        ws.onclose = () => {
-            alert("Keine Verbindung zum Server mehr!")
-            document.querySelector("#status").innerText = "Keine Verbindung zum Server!"
-            document.querySelector("#status").style.color = 'red'
-        }
-
-        const login = () => {
-            username = document.querySelector("#username").value
-            if(username == "") {
-                alert("Bitte gib einen gültigen Nutzernamen an.")
-                return
-            }
-
-            ws.send("join///" + username)
-            document.querySelector("#join-form").style.display = "none"
-            document.querySelector("#chat-form").style.display = "block"
-            document.querySelector("#userstatus").innerText = "Eingeloggt als " + username
-            document.querySelector("#userstatus").style.color = 'green'
-        }
-
-        const sendmessage = () => {
-            message = document.querySelector("#message").value
-            ws.send("message///" + username + "///" + message)
-            document.querySelector("#message").value = ""
-        }
-
-        ws.onmessage = event => {
-            console.log(event)
-            var author = event.data.split(">>>")[0]
-            var message = event.data.split(">>>").slice(1)
-            var messages = document.querySelector("#messages")
-
-            messages.innerHTML += `
-                <div class="message">
-                    <h3 class="message-author">${author}</h3>
-                    <p class="message-content">
-                        ${message}
-                    </p>
-                </div>
-            `;
-
-            messages.scrollTop = messages.scrollHeight
-        }
-
-        // ws.onmessage = function (e) {
-        // console.log("RECEIVED >> " + e.data);
-        // toggler = document.getElementById(e.data.replace("off", "on"));
-
-        // if (toggler) {
-        //     action = e.data.includes("on");
-        //     toggler.checked = action;
-        // }
-        // };
-
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>

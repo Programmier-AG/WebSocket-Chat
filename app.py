@@ -6,7 +6,7 @@ from flask import Flask
 from flask.templating import render_template
 from websocket_server import WebsocketServer
 
-app = Flask("WebSocket-Chat", template_folder='web')
+app = Flask("WebSocket-Chat", template_folder="web", static_folder="web/public")
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 #############################
@@ -29,6 +29,7 @@ def websocket_server():
     # um zu wissen, welcher Client zu welchem Nutzernamen gehört
     clients = {}
 
+    # Funktion, die bei jeder Nachricht gecallt wird
     def handle_command(client, server, message):
         # Message-Aufbau : command///arg1///arg2///arg3
         command = message.split("///")[0]
